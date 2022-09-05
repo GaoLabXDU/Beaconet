@@ -1,20 +1,61 @@
-# Beaconet
-The python package for the paper "A reference-free method for integration of multiple batches of scRNA-seq data"
-
-
-README
+Beaconet
 ===========================
-该文件用来测试和展示书写README的各种markdown语法。GitHub的markdown语法在标准的markdown语法基础上做了扩充，称之为`GitHub Flavored Markdown`。简称`GFM`，GFM在GitHub上有广泛应用，除了README文件外，issues和wiki均支持markdown语法。
-
-****
+This project is an python implementation of Beaconet, which is introduced in the paper "A reference-free method for integration of multiple batches of scRNA-seq data".
+The raw scripts and data for reproduce all results in our paper is free available in figshare doi:10.6084/m9.figshare.20764843
 	
-|Author|果冻虾仁|
-|---|---
-|E-mail|Jelly.K.Wang@qq.com
+|Author|E-mail|
+|---|---|
+|Xu Han|hxu10670@gmail.com|
+|Gao Lin|-|
+
+## Catalogue
+1. Install
+2. Data preprocessing
+3. Correction and integration
+4. Visualization and evaluation
+5. Environments
+---------
+## Install
+Our algorithm, Beaconet, is based on deep learning. The implementation of Beaconet is implemented on the PyTorch framework.
+If there are GPUs on your machine, it is strongly support that to install the pytorch with cuda.
+Here is some example to install pytorch.
+
+install the pytorch with cuda 11.3 using pip:
+```Bash
+pip3 install torch --extra-index-url https://download.pytorch.org/whl/cu113
+```
+install the pytorch without cuda using pip:
+```Bash
+pip install torch
+```
+See the offical site of PyTorch for more information about the installation of PyTorch.
+https://pytorch.org/get-started/locally/
+
+Install Beaconet using pip.
+```Bash
+pip install Beaconet
+```
+
+## Data preprocessing
+
+```python
+def fun(x=2):
+	return 2
+print(a=2)
+```
+## Correction and integration
+
+## Visualization and evaluation
 
 
-****
-## 目录
+
+
+
+
+
+
+
+
 * [横线](#横线)
 * [标题](#标题)
 * [文本](#文本)
