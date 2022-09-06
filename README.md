@@ -102,3 +102,29 @@ the example data is saved in the folder named 'data'.
 ![cell_type](https://github.com/xuxiaohan/Beaconet/blob/main/bio.png)
 ![batch](https://github.com/xuxiaohan/Beaconet/blob/main/batch.png)
 ![LMD](https://github.com/xuxiaohan/Beaconet/blob/main/local_merge_divergence.png)
+
+## Environments
+The requirements of Beaconet is included in the 'setup.py'. these packages will be automatically installed when install Beaconet.
+For convenience of the audience to reproduce the results in our paper, we provied the specific version of the required environment and package in the experiments of our paper here.
+
+Windows 10, HP Pavilion Gaming Desktop 690-07xx
+Intel(R) Core(TM) i7-9700F CPU @ 3.00GHz 3.00GHz
+16 GB memory. 64bit operating system
+
+CUDA version:
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2019 NVIDIA Corporation
+Built on Fri_Feb__8_19:08:26_Pacific_Standard_Time_2019
+Cuda compilation tools, release 10.1, V10.1.105
+
+Python 3.6.8
+
+numpy==1.19.5
+pandas==1.1.5
+seaborn==0.9.0
+matplotlib==3.3.4
+tqdm==4.62.2
+scikit-learn==0.24.1
+torch==1.8.1+cu101
+umap-learn==0.5.1
+scipy==1.5.4
