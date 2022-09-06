@@ -99,3 +99,6 @@ the example data is saved in the folder named 'data'.
     visualization(ump,batch_col="batch",bio_col="cell_type")
     visualization_lmd(ump, lmd, filename="local_merge_divergence.png")
 ```
+![cell_type](https://github.com/xuxiaohan/Beaconet/blob/main/bio.png)
+![batch](https://github.com/xuxiaohan/Beaconet/blob/main/batch.png)
+
