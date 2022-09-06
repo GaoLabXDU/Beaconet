@@ -101,4 +101,4 @@ the example data is saved in the folder named 'data'.
 ```
 ![cell_type](https://github.com/xuxiaohan/Beaconet/blob/main/bio.png)
 ![batch](https://github.com/xuxiaohan/Beaconet/blob/main/batch.png)
-
+![LMD](https://github.com/xuxiaohan/Beaconet/blob/main/local_merge_divergence.png)
