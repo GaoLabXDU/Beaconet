@@ -78,6 +78,15 @@ The details of preprocessing is described below:
 4. extract the top 2000 highly variable genes.
 We used the preprocessing functions in scanpy package to preprocess the raw data.
 
+We have provided the preprocessed data in path './data/'.
+
+Readers who are not interested in the preprocessing of cells can skip this section and directly transfer to [Correct batch effect for integration](#Correct-batch-effect-for-integration).
+If you want to preprocess your data, you need to install scanpy using the command below.
+
+```Bash
+pip install scanpy
+```
+
 ```python
     import scanpy as sc
     adata=sc.AnnData(X=df,obs=meta) #preparing data
@@ -91,7 +100,6 @@ We used the preprocessing functions in scanpy package to preprocess the raw data
     for batch,data in df.groupby(adata.obs["batch_id"]): # save the preprocessed data
     	data.to_csv(f"hvg2000_batch{batch}.csv")
 
-   # we have provided the preprocessed data in path './data/'
 ```
 
 ### Correct batch effect for integration
@@ -135,9 +143,9 @@ the example data is saved in the folder named 'data'.
 ![PMD](https://github.com/xuxiaohan/Beaconet/blob/main/local_merge_divergence.png)
 
 ### Experimental environment in our study
-
-The requirements of Beaconet is included in the 'setup.py'. these packages will be automatically installed when install Beaconet.
-For convenience of the audience to reproduce the results in our paper, we provied the specific version of the required environment and package in the experiments of our paper here.
+To try our best to help the audience who want to reproduce the results in our paper, we provied the specific version of the required environment and package in the experiments of our paper here.
+We note that it is usually not necessary to install the exactly specific version of these packages for Beaconet. The requirements of Beaconet is included in the 'setup.py'. these packages will be automatically installed when install Beaconet.
+We provide the specific version of the dependence pacakges because these third-party package may be not strictly garantee backward-compatibility in the latest version. For example, they may change the behavor of their function, alter the keywords of arguments and change the default value of arguments when updating their package. These changes may potentially lead to different results. Thus, some audience may be interested in the older version of these packages.
 
 Windows 10, HP Pavilion Gaming Desktop 690-07xx
 
