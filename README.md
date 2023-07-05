@@ -15,9 +15,9 @@ This software is developed and mantained by Han Xu <hxu10670@gmail.com>
 This is a tutorial for beginer. We will introduce the whole batch effect removal processing step-by-step using a case task, the integration of two batches of human blood dendritic cell datasets. The batch effect of these two datasets is relative small, since they were generaetd by the same laboratory (Villani et al.) using the same sequencing technology (Smart-Seq2) in different plates. CD1C DC in batch 1 and CD141 DC in batch 2 were removed refering to Tran et al.
 
 ### Catalogue
-* [横线](#横线)
-* import the nessary package and function
-* [Install](# Install)
+* [Install](#Install)
+* [import the nessary package and function](#import the nessary package and function)
+
 * Data preprocessing
 * Corrects batch effect for integration
 * Visualization and evaluation
