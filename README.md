@@ -16,18 +16,24 @@ This is a tutorial for beginer. We will introduce the whole batch effect removal
 
 ### Catalogue
 * [Install](#Install)
-* [Import the nessary package and function](#Import-nessary-package-and-function)
+    * [Install Pytorch](#Install-Pytorch)
+    * [Install Beaconet](#Install-Beaconet)
+* [Import nessary packages and functions](#Import-nessary-packages-and-functions)
 * [Data preprocessing](#Data-preprocessing)
 * [Correct batch effect for integration](#Correct-batch-effect-for-integration)
 * [Visualization-and-evaluation](#Visualization-and-evaluation)
 ---------
 
-# Install
+#### Install
+Our algorithm, Beaconet, is a deep learning method, which is implemented using PyTorch framework.
+If you have GPUs on your machine, it is strongly support that to install pytorch with cuda to accelerate the running speed.
+Just skip the section **Install PyTorch**, if you are familiar to PyTorch framework and deep learning or you have expertise to install PyTorch with correct version to your machine.
+##### Install Pytorch
 
-Our algorithm, Beaconet, is based on deep learning. Beaconet is implemented on the PyTorch framework.
-If there are GPUs on your machine, it is strongly support that to install the pytorch with cuda.
+Firstly, you need select cuda version that is supported by your computer. click [CUDA Toolkit Archive](https://developer.nvidia.com/cuda-toolkit-archive) to find a cuda with specific version.
+After installing cuda, you can install GPU version PyTorch. It is notable that you should select the correct version matching to the installed cuda on your machine.
+
 Here is some example to install pytorch.
-
 install the pytorch with cuda 11.3 using pip:
 ```Bash
 pip3 install torch --extra-index-url https://download.pytorch.org/whl/cu113
@@ -36,15 +42,18 @@ install the pytorch without cuda using pip:
 ```Bash
 pip install torch
 ```
+
 See the offical site of PyTorch for more information about the installation of PyTorch.
 https://pytorch.org/get-started/locally/
+
+##### Install Beaconet
 
 Install Beaconet using pip.
 ```Bash
 pip install Beaconet
 ```
 
-## Import nessary package and function
+## Import nessary packages and functions
 ```python
 import torch as t
 from Beaconet import correction,visualization,get_umap,get_lmd,visualization_lmd
@@ -53,29 +62,33 @@ from glob import glob
 ```
 
 ## Data preprocessing
-The data preprocessing is important to the data-driven algorithm. In Beaconet, we assume the inputs is the log-scaled TPM/count, and filter the non-positive values in the correction module. The details of preprocessing for Beaconet is described below:
+Data preprocessing is an important step for data science and data-driven algorithm.
+We assume the inputs is the log-scaled TPM/count. To ensure the algorithm work well, you should NOT input raw count values or z-scored values. It is because that the raw count follows a heavy tailed distribution, which impacts the model optimized by gradient descent algorithm. The reason of we advise do not input z-score values for Beaconet is that the designed Corrector Network in Beaconet will filter any non-positive values as invalid gene expression values.
+The details of preprocessing is described below:
 1. filter the low-quality genes. We removed the genes that expressed in less than 3 cells. If the expression value of gene a on cell b is zero, we consider the gene does not expressed in the cell.
 2. filter the low-quality cells. We removed the cells that expressed less than 300 genes.
 3. normalize to library size and exclude the highly expressed values.
 4. extract the top 2000 highly variable genes.
 We used the preprocessing functions in scanpy package to preprocess the raw data.
+
 ```python
-    adata=sc.AnnData(X=df,obs=meta)
-    sc.pp.filter_genes(data=adata,min_cells=3,inplace=True)
-    sc.pp.filter_cells(data=adata,min_genes=300,inplace=True)
-    sc.pp.normalize_total(adata,target_sum=10000,exclude_highly_expressed=True,inplace=True)
-    sc.pp.log1p(adata)
-    sc.pp.highly_variable_genes(adata, n_top_genes=2000, flavor="seurat", batch_key="batch")
+    adata=sc.AnnData(X=df,obs=meta) #preparing data
+    sc.pp.filter_genes(data=adata,min_cells=3,inplace=True) #filter low-quality genes
+    sc.pp.filter_cells(data=adata,min_genes=300,inplace=True) #filter low-quality cells
+    sc.pp.normalize_total(adata,target_sum=10000,exclude_highly_expressed=True,inplace=True) # normalize for the library size
+    sc.pp.log1p(adata) # transform to log-scaled values.
+    sc.pp.highly_variable_genes(adata, n_top_genes=2000, flavor="seurat", batch_key="batch") #select top 2000 HVGs
     adata=adata[:,adata.var['highly_variable']]
     
-    for batch,data in df.groupby(adata.obs["batch_id"]):
+    for batch,data in df.groupby(adata.obs["batch_id"]): # save the preprocessed data
     	data.to_csv(f"hvg2000_batch{batch}.csv")
 ```
+
 ## Correct batch effect for integration
-In this section, we will show you how to apply Beaconet on an example data.
+In this section, we will show you how to apply Beaconet on an example task.
 the example data is saved in the folder named 'data'.
 
-1. read the preprocessed data and meta data. It is notable that Beaconet only use the batch label information. The cell type and other information is used for visualization and evaluation of the correction results, rathter than used during correction.
+1. read the preprocessed data and meta data. It is notable that Beaconet DO NOT need the supervised information of cell types. The cell type and other information is only used for visualization and evaluation of the correction results, rathter than used during correction.
 ```python
     # read scRNA-seq data
     dfs=[
@@ -87,7 +100,7 @@ the example data is saved in the folder named 'data'.
     meta = pd.read_csv("data/DC_cell_meta.csv", index_col=0)
     meta = meta.reindex(list(dfs[0].index)+list(dfs[1].index))
 ```
-2. correction and save the result. The dfs is a list of DataFrame. the cells come from the same batch is organized in the same DataFrame.The correction function returns the corrected data.
+2. correction and save the result. The 'dfs' is a list of DataFrame. the cells come from the same batch is organized in the same DataFrame.The correction function returns the corrected data.
 ```python
     result=correction(dfs)
     result.to_csv("test.csv")
