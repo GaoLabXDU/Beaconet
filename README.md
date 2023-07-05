@@ -35,14 +35,19 @@ You need select cuda version that is supported by your computer. click [CUDA Too
 After installing cuda, you can install GPU version PyTorch. It is notable that you should select the correct version matching to the installed cuda on your machine.
 
 Here are some example to install pytorch.
-
-install the pytorch with cuda 11.3 using pip:
-```Bash
-pip3 install torch --extra-index-url https://download.pytorch.org/whl/cu113
-```
-install the pytorch without cuda using pip:
+install the latest version of pytorch without cuda using pip:
 ```Bash
 pip install torch
+```
+
+install pytorch 1.8.0 without cuda using pip:
+```Bash
+pip install torch==1.8.0
+```
+
+install pytorch 1.8.0 with cuda 11.1 using pip:
+```Bash
+pip install torch==1.8.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
 See the offical site of PyTorch for more information about the installation of PyTorch.
