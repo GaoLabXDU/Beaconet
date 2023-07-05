@@ -24,16 +24,18 @@ This is a tutorial for beginer. We will introduce the whole batch effect removal
 * [Visualization-and-evaluation](#Visualization-and-evaluation)
 ---------
 
-#### Install
+### Install
 Our algorithm, Beaconet, is a deep learning method, which is implemented using PyTorch framework.
-If you have GPUs on your machine, it is strongly support that to install pytorch with cuda to accelerate the running speed.
-Just skip the section **Install PyTorch**, if you are familiar to PyTorch framework and deep learning or you have expertise to install PyTorch with correct version to your machine.
-##### Install Pytorch
+If you have GPUs on your machine, it is strongly recommended to install pytorch with cuda to accelerate the running speed.
+Just **skip** the section **Install PyTorch**, if you are **familiar to PyTorch framework** and deep learning or you have expertise to install PyTorch with correct version to your machine.
 
-Firstly, you need select cuda version that is supported by your computer. click [CUDA Toolkit Archive](https://developer.nvidia.com/cuda-toolkit-archive) to find a cuda with specific version.
+#### Install Pytorch
+
+You need select cuda version that is supported by your computer. click [CUDA Toolkit Archive](https://developer.nvidia.com/cuda-toolkit-archive) to find a cuda with specific version.
 After installing cuda, you can install GPU version PyTorch. It is notable that you should select the correct version matching to the installed cuda on your machine.
 
-Here is some example to install pytorch.
+Here are some example to install pytorch.
+
 install the pytorch with cuda 11.3 using pip:
 ```Bash
 pip3 install torch --extra-index-url https://download.pytorch.org/whl/cu113
@@ -44,16 +46,16 @@ pip install torch
 ```
 
 See the offical site of PyTorch for more information about the installation of PyTorch.
-https://pytorch.org/get-started/locally/
+[https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/)
 
-##### Install Beaconet
+#### Install Beaconet
 
 Install Beaconet using pip.
 ```Bash
 pip install Beaconet
 ```
 
-## Import nessary packages and functions
+### Import nessary packages and functions
 ```python
 import torch as t
 from Beaconet import correction,visualization,get_umap,get_lmd,visualization_lmd
@@ -61,7 +63,7 @@ import pandas as pd
 from glob import glob
 ```
 
-## Data preprocessing
+### Data preprocessing
 Data preprocessing is an important step for data science and data-driven algorithm.
 We assume the inputs is the log-scaled TPM/count. To ensure the algorithm work well, you should NOT input raw count values or z-scored values. It is because that the raw count follows a heavy tailed distribution, which impacts the model optimized by gradient descent algorithm. The reason of we advise do not input z-score values for Beaconet is that the designed Corrector Network in Beaconet will filter any non-positive values as invalid gene expression values.
 The details of preprocessing is described below:
@@ -84,7 +86,7 @@ We used the preprocessing functions in scanpy package to preprocess the raw data
     	data.to_csv(f"hvg2000_batch{batch}.csv")
 ```
 
-## Correct batch effect for integration
+### Correct batch effect for integration
 In this section, we will show you how to apply Beaconet on an example task.
 the example data is saved in the folder named 'data'.
 
@@ -105,7 +107,7 @@ the example data is saved in the folder named 'data'.
     result=correction(dfs)
     result.to_csv("test.csv")
 ```
-## Visualization and evaluation
+### Visualization and evaluation
 1. dimension reduction
 ```python
     ump=get_umap(result,meta,batch_col="batch",bio_col="cell_type")
@@ -124,7 +126,7 @@ the example data is saved in the folder named 'data'.
 ![batch](https://github.com/xuxiaohan/Beaconet/blob/main/batch.png)
 ![PMD](https://github.com/xuxiaohan/Beaconet/blob/main/local_merge_divergence.png)
 
-## Experimental environment in our study
+### Experimental environment in our study
 
 The requirements of Beaconet is included in the 'setup.py'. these packages will be automatically installed when install Beaconet.
 For convenience of the audience to reproduce the results in our paper, we provied the specific version of the required environment and package in the experiments of our paper here.
