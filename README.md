@@ -16,9 +16,9 @@ This is a tutorial for beginer. We will introduce the whole batch effect removal
 
 ### Catalogue
 * [Install](#Install)
-* [import the nessary package and function](#import-the-nessary-package-and-function)
+* [Import the nessary package and function](#import-the-nessary-package-and-function)
 * [Data preprocessing](#Data-preprocessing)
-* [Corrects batch effect for integration](#Corrects-batch-effect-for-integration)
+* [Correct batch effect for integration](#Correct-batch-effect-for-integration)
 * [Visualization-and-evaluation](#Visualization-and-evaluation)
 ---------
 
@@ -44,7 +44,7 @@ Install Beaconet using pip.
 pip install Beaconet
 ```
 
-## import the nessary package and function
+## Import nessary package and function
 ```python
 import torch as t
 from Beaconet import correction,visualization,get_umap,get_lmd,visualization_lmd
@@ -71,7 +71,7 @@ We used the preprocessing functions in scanpy package to preprocess the raw data
     for batch,data in df.groupby(adata.obs["batch_id"]):
     	data.to_csv(f"hvg2000_batch{batch}.csv")
 ```
-## Correction and integration
+## Correct batch effect for integration
 In this section, we will show you how to apply Beaconet on an example data.
 the example data is saved in the folder named 'data'.
 
