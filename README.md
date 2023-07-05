@@ -16,16 +16,11 @@ This is a tutorial for beginer. We will introduce the whole batch effect removal
 
 ### Catalogue
 * [Install](#Install)
-* <a id="import the nessary package and function">Markdown语法</a>
-* [import the nessary package and function](#import the nessary package and function)
-
-* Data preprocessing
-* Corrects batch effect for integration
-* Visualization and evaluation
+* [import the nessary package and function](#import-the-nessary-package-and-function)
+* [Data preprocessing](#Data-preprocessing)
+* [Corrects batch effect for integration](#Corrects-batch-effect-for-integration)
+* [Visualization-and-evaluation](#Visualization-and-evaluation)
 ---------
-
-
-
 
 # Install
 
