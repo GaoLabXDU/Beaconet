@@ -120,7 +120,7 @@ the example data is saved in the folder named 'data'.
     visualization_lmd(ump, lmd, filename="local_merge_divergence.png")
 ```
 
-![cell_type](https://github.com/xuxiaohan/Beaconet/blob/main/bio.png)
+![cell_type](https://github.com/xuxiaohan/Beaconet/blob/main/bio.png){:width="300px" height="300px"}
 ![batch](https://github.com/xuxiaohan/Beaconet/blob/main/batch.png)
 ![PMD](https://github.com/xuxiaohan/Beaconet/blob/main/local_merge_divergence.png)
 
