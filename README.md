@@ -1,22 +1,34 @@
-Beaconet
+Beaconet: a reference-free method for integration of multiple batches of scRNA-seq data in original molecular space
 ===========================
-This project is an python implementation of Beaconet, which is introduced in the paper "A reference-free method for integration of multiple batches of scRNA-seq data".
-The raw scripts and data for reproduce all results in our paper is free available in figshare doi:10.6084/m9.figshare.20764843
-	
-|Author|E-mail|
-|---|---|
-|Xu Han|hxu10670@gmail.com|
-|Gao Lin|-|
+This project is a python implementation of Beaconet, which is introduced in the paper "A reference-free method for integration of multiple batches of scRNA-seq data in original molecular space".
 
-## Catalogue
-1. Install
-2. import the nessary package and function
-3. Data preprocessing
-4. Correction and integration
-5. Visualization and evaluation
-6. Environments
+Batch effect removal is crucial for single-cell data analysis, as the undesired batch-specific systematic variations among different technologies or experimental laboratories may distort biological signals and hinder the integration of datasets. As a reference-free batch effect removal method, Beaconet is particularly beneficial for researchers who lack prior knowledge about the selection of reference when integrate multiple batches of single-cell transcriptomic datasets. Furthermore, the preserved gene features in the corrected data by Beaconet can not only effectively characterize cell types and subpopulations, but also be directly used for downstream differential expression analysis.
+
+All the preprocessed data, code scripts,and necessary outputs in the experiments of our paper are free available in figshare doi:10.6084/m9.figshare.20764843 to ensure reproducibility.
+
+**Keywords:** single-cell data, batch effect, reference-free, molecular feature space;
+
+## Author and Mantainer
+This software is developed and mantained by Han Xu <hxu10670@gmail.com>
+
+## Tutorial
+This is a tutorial for beginer. We will introduce the whole batch effect removal processing step-by-step using a case task, the integration of two batches of human blood dendritic cell datasets. The batch effect of these two datasets is relative small, since they were generaetd by the same laboratory (Villani et al.) using the same sequencing technology (Smart-Seq2) in different plates. CD1C DC in batch 1 and CD141 DC in batch 2 were removed refering to Tran et al.
+
+### Catalogue
+[test](#tiao)
+
+* import the nessary package and function
+* [Install](# Install)
+* Data preprocessing
+* Corrects batch effect for integration
+* Visualization and evaluation
 ---------
-## Install
+
+
+
+
+# Install
+
 Our algorithm, Beaconet, is based on deep learning. Beaconet is implemented on the PyTorch framework.
 If there are GPUs on your machine, it is strongly support that to install the pytorch with cuda.
 Here is some example to install pytorch.
@@ -99,22 +111,23 @@ the example data is saved in the folder named 'data'.
     visualization(ump,batch_col="batch",bio_col="cell_type")
     visualization_lmd(ump, lmd, filename="local_merge_divergence.png")
 ```
+
 ![cell_type](https://github.com/xuxiaohan/Beaconet/blob/main/bio.png)
 ![batch](https://github.com/xuxiaohan/Beaconet/blob/main/batch.png)
-![LMD](https://github.com/xuxiaohan/Beaconet/blob/main/local_merge_divergence.png)
+![PMD](https://github.com/xuxiaohan/Beaconet/blob/main/local_merge_divergence.png)
 
-## Environments
+# tiao
+
+## Experimental environment in our study
+
 The requirements of Beaconet is included in the 'setup.py'. these packages will be automatically installed when install Beaconet.
 For convenience of the audience to reproduce the results in our paper, we provied the specific version of the required environment and package in the experiments of our paper here.
 
 Windows 10, HP Pavilion Gaming Desktop 690-07xx
 
-
 Intel(R) Core(TM) i7-9700F CPU @ 3.00GHz 3.00GHz
 
-
 16 GB memory. 64bit operating system
-
 
 CUDA version:
 
@@ -126,9 +139,7 @@ Built on Fri_Feb__8_19:08:26_Pacific_Standard_Time_2019
 
 Cuda compilation tools, release 10.1, V10.1.105
 
-
 Python 3.6.8
-
 
 numpy==1.19.5
 
