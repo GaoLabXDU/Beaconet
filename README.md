@@ -66,6 +66,7 @@ import torch as t
 from Beaconet import correction,visualization,get_umap,get_lmd,visualization_lmd
 import pandas as pd
 from glob import glob
+import scanpy as sc
 ```
 
 ### Data preprocessing
