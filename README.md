@@ -66,7 +66,6 @@ import torch as t
 from Beaconet import correction,visualization,get_umap,get_lmd,visualization_lmd
 import pandas as pd
 from glob import glob
-import scanpy as sc
 ```
 
 ### Data preprocessing
@@ -80,6 +79,7 @@ The details of preprocessing is described below:
 We used the preprocessing functions in scanpy package to preprocess the raw data.
 
 ```python
+    import scanpy as sc
     adata=sc.AnnData(X=df,obs=meta) #preparing data
     sc.pp.filter_genes(data=adata,min_cells=3,inplace=True) #filter low-quality genes
     sc.pp.filter_cells(data=adata,min_genes=300,inplace=True) #filter low-quality cells
@@ -90,6 +90,8 @@ We used the preprocessing functions in scanpy package to preprocess the raw data
     
     for batch,data in df.groupby(adata.obs["batch_id"]): # save the preprocessed data
     	data.to_csv(f"hvg2000_batch{batch}.csv")
+
+   # we have provided the preprocessed data in path './data/'
 ```
 
 ### Correct batch effect for integration
