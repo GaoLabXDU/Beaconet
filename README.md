@@ -16,7 +16,7 @@ This is a tutorial for beginer. We will introduce the whole batch effect removal
 
 ### Catalogue
 * [Install](#Install)
-* [Import the nessary package and function](#import-the-nessary-package-and-function)
+* [Import the nessary package and function](#Import-the-nessary-package-and-function)
 * [Data preprocessing](#Data-preprocessing)
 * [Correct batch effect for integration](#Correct-batch-effect-for-integration)
 * [Visualization-and-evaluation](#Visualization-and-evaluation)
