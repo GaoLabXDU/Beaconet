@@ -138,7 +138,7 @@ the example data is saved in the folder named 'data'.
 2. correction and save the result. The 'dfs' is a list of DataFrame. the cells come from the same batch is organized in the same DataFrame.The correction function returns the corrected data.
 ```python
     result=correction(dfs)
-    result.to_csv("test.csv")
+    result.to_csv("corrected.csv")
 ```
 ### Visualization and evaluation
 1. dimension reduction
@@ -152,12 +152,12 @@ the example data is saved in the folder named 'data'.
 3. plot
 ```python
     visualization(ump,batch_col="batch",bio_col="cell_type")
-    visualization_lmd(ump, lmd, filename="local_merge_divergence.png")
+    visualization_lmd(ump, lmd, filename="positive_merge_divergence.png")
 ```
 
 ![cell_type](https://github.com/xuxiaohan/Beaconet/blob/main/bio.png)
 ![batch](https://github.com/xuxiaohan/Beaconet/blob/main/batch.png)
-![PMD](https://github.com/xuxiaohan/Beaconet/blob/main/local_merge_divergence.png)
+![PMD](https://github.com/xuxiaohan/Beaconet/blob/main/positive_merge_divergence.png)
 
 ### Experimental environment in our study
 To try our best to help the audience who want to reproduce the results in our paper, we provied the specific version of the required environment and package in the experiments of our paper here.
