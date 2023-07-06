@@ -50,7 +50,24 @@ install pytorch 1.8.0 with cuda 11.1 using pip:
 pip install torch==1.8.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
-See the offical site of PyTorch for more information about the installation of PyTorch.
+
+install pytorch 1.8.1 with cuda 10.1 using pip:
+```Bash
+pip install torch==1.8.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+If it raise error *ERROR: Could not find a version that satisfies the requirement torch==1.8.1+cu101*,
+you can solve it by two step:
+1. run the command below (removed the specific cuda version).
+```Bash
+pip install torch==1.8.0+cu -f https://download.pytorch.org/whl/torch_stable.html
+```
+2. install **torch==1.8.1+cu101** after it raise *ERROR: Could not find a version that satisfies the requirement torch==1.8.1+cu*
+```Bash
+pip install torch==1.8.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+if you have any question about the installation of PyTorch framework, you can See the offical site of PyTorch for more information.
 [https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/)
 
 #### Install Beaconet
