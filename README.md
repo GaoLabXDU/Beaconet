@@ -74,7 +74,7 @@ if you have any question about the installation of PyTorch framework, you can Se
 
 Install Beaconet using pip.
 ```Bash
-pip install Beaconet
+pip install Beaconet -U
 ```
 
 ### Import nessary packages and functions
