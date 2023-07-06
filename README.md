@@ -147,21 +147,6 @@ To try our best to help the audience who want to reproduce the results in our pa
 We note that it is usually not necessary to install the exactly specific version of these packages for Beaconet. The requirements of Beaconet is included in the 'setup.py'. these packages will be automatically installed when install Beaconet.
 We provide the specific version of the dependence pacakges because these third-party package may be not strictly garantee backward-compatibility in the latest version. For example, they may change the behavor of their function, alter the keywords of arguments and change the default value of arguments when updating their package. These changes may potentially lead to different results. Thus, some audience may be interested in the older version of these packages.
 
-Windows 10, HP Pavilion Gaming Desktop 690-07xx
-
-Intel(R) Core(TM) i7-9700F CPU @ 3.00GHz 3.00GHz
-
-16 GB memory. 64bit operating system
-
-CUDA version:
-
-nvcc: NVIDIA (R) Cuda compiler driver
-
-Copyright (c) 2005-2019 NVIDIA Corporation
-
-Built on Fri_Feb__8_19:08:26_Pacific_Standard_Time_2019
-
-Cuda compilation tools, release 10.1, V10.1.105
 
 Python 3.6.8
 
@@ -183,3 +168,20 @@ umap-learn==0.5.1
 
 scipy==1.5.4
 
+**CUDA version reported by command 'nvcc -V':**
+> nvcc: NVIDIA (R) Cuda compiler driver
+> 
+> Copyright (c) 2005-2019 NVIDIA Corporation
+> 
+> Built on Fri_Feb__8_19:08:26_Pacific_Standard_Time_2019
+> 
+> Cuda compilation tools, release 10.1, V10.1.105
+
+**CUDA version reported by command 'nvidia-smi':**
+> NVIDIA-SMI 441.22       Driver Version: 441.22       CUDA Version: 10.2
+
+Windows 10, HP Pavilion Gaming Desktop 690-07xx
+
+Intel(R) Core(TM) i7-9700F CPU @ 3.00GHz 3.00GHz
+
+16 GB memory. 64bit operating system
