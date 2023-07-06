@@ -148,10 +148,23 @@ the example data is saved in the folder named 'data'.
     ump["cell_type"] = meta["cell_type"]
 
 ```
-2. calculate the positive rate and local merge divergence of positive cells
+2. clustering
 ```python
-    positive_rate,pmd=get_pmd(ump,batch_col="batch",bio_col="cell_type")
+    cluster=get_cluster(ump[["UMAP_1","UMAP_2"]],k=4)
 ```
+
+3. evaluation
+```python
+    # calculate the positive rate and local merge divergence of positive cells
+    positive_rate,pmd=get_pmd(ump,batch_col="batch",bio_col="cell_type")
+
+    #calculate NMI
+    print(f"NMI: {nmi(cluster,meta['cell_type'])}")
+
+    #calculate ARI
+    print(f"NMI: {ari(cluster,meta['cell_type'])}")    
+```
+
 3. plot
 ```python
     visualization(ump,batch_col="batch",bio_col="cell_type",filename1="test/batch.png",filename2="test/bio.png")
