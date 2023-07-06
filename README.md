@@ -79,10 +79,10 @@ pip install Beaconet
 
 ### Import nessary packages and functions
 ```python
-import torch as t
-from Beaconet import correction,visualization,get_umap,get_lmd,visualization_lmd
+from Beaconet import correction,visualization,get_umap,get_pmd,visualization_pmd,get_cluster
 import pandas as pd
-from glob import glob
+from sklearn.metrics import normalized_mutual_info_score as nmi
+from sklearn.metrics import adjusted_rand_score as ari
 ```
 
 ### Data preprocessing
@@ -138,26 +138,29 @@ the example data is saved in the folder named 'data'.
 2. correction and save the result. The 'dfs' is a list of DataFrame. the cells come from the same batch is organized in the same DataFrame.The correction function returns the corrected data.
 ```python
     result=correction(dfs)
-    result.to_csv("corrected.csv")
+    result.to_csv("test/corrected.csv")
 ```
 ### Visualization and evaluation
 1. dimension reduction
 ```python
-    ump=get_umap(result,meta,batch_col="batch",bio_col="cell_type")
+    ump=get_umap(result)
+    ump["batch"] = meta["batch"]
+    ump["cell_type"] = meta["cell_type"]
+
 ```
 2. calculate the local merge divergence
 ```python
-    positive_rate,lmd=get_lmd(ump,batch_col="batch",bio_col="cell_type")
+    positive_rate,pmd=get_pmd(ump,batch_col="batch",bio_col="cell_type")
 ```
 3. plot
 ```python
-    visualization(ump,batch_col="batch",bio_col="cell_type")
-    visualization_lmd(ump, lmd, filename="positive_merge_divergence.png")
+    visualization(ump,batch_col="batch",bio_col="cell_type",filename1="test/batch.png",filename2="test/bio.png")
+    visualization_pmd(ump, pmd, filename="test/positive_merge_divergence.png")
 ```
 
-![cell_type](https://github.com/xuxiaohan/Beaconet/blob/main/bio.png)
-![batch](https://github.com/xuxiaohan/Beaconet/blob/main/batch.png)
-![PMD](https://github.com/xuxiaohan/Beaconet/blob/main/positive_merge_divergence.png)
+![cell_type](https://github.com/xuxiaohan/Beaconet/blob/main/test/bio.png)
+![batch](https://github.com/xuxiaohan/Beaconet/blob/main/test/batch.png)
+![PMD](https://github.com/xuxiaohan/Beaconet/blob/main/test/positive_merge_divergence.png)
 
 ### Experimental environment in our study
 To try our best to help the audience who want to reproduce the results in our paper, we provied the specific version of the required environment and package in the experiments of our paper here.
