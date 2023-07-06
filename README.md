@@ -162,7 +162,7 @@ the example data is saved in the folder named 'data'.
     print(f"NMI: {nmi(cluster,meta['cell_type'])}")
 
     #calculate ARI
-    print(f"NMI: {ari(cluster,meta['cell_type'])}")    
+    print(f"ARI: {ari(cluster,meta['cell_type'])}")    
 ```
 
 3. plot
