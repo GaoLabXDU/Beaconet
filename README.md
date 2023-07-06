@@ -148,7 +148,7 @@ the example data is saved in the folder named 'data'.
     ump["cell_type"] = meta["cell_type"]
 
 ```
-2. calculate the local merge divergence
+2. calculate the positive rate and local merge divergence of positive cells
 ```python
     positive_rate,pmd=get_pmd(ump,batch_col="batch",bio_col="cell_type")
 ```
