@@ -1,8 +1,16 @@
 Beaconet: a reference-free method for integration of multiple batches of scRNA-seq data in original molecular space
 ===========================
 ## Catalogue
-1. [Introduction](#Introduction)
-
+* [Introduction](#Introduction)
+* [Author and Mantainer](#Author-and-Mantainer)
+* [Tutorial](#Tutorial)
+    * [Install](#Install)
+        * [Install Pytorch](#Install-Pytorch)
+        * [Install Beaconet](#Install-Beaconet)
+    * [Import necessary packages and functions](#Import-necessary-packages-and-functions)  
+    * [Data preprocessing](#Data-preprocessing)  
+    * [Correct batch effect for integration](#Correct-batch-effect-for-integration)  
+    * [Visualization-and-evaluation](#Visualization-and-evaluation)  
 
 ## Introduction
 This project is a python implementation of Beaconet, which is introduced in the paper "A reference-free method for integration of multiple batches of scRNA-seq data in original molecular space".
@@ -76,7 +84,7 @@ Install Beaconet using pip.
 pip install Beaconet -U
 ```
 
-### Import nessary packages and functions
+### Import necessary packages and functions
 ```python
 from Beaconet import correction,visualization,get_umap,get_pmd,visualization_pmd,get_cluster
 import pandas as pd
