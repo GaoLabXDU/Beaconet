@@ -7,15 +7,48 @@ import pandas as pd
 import seaborn as sns
 from sklearn.cluster import KMeans
 
-def _check_ndarray(emb):
-    if(isinstance(emb,pd.DataFrame)):
-        return emb.values
-    elif(isinstance(emb,np.ndarray)):
-        return emb
-    else:
-        raise RuntimeError(f"unknown type {type(emb)}")
+"""
+This is a collection of function tools for visualizing the results. It mainly contains four useful functions, including
+*visualization*, *get_umap*, *visualization_pmd*, *get_cluster*.
+
+*visualization* is for plotting scatter figures, the dot will be colored by the given labels (cell type or batch name).
+The cells have the same label will be plotted using the same color.
+
+*get_umap* is a function for transforming the high-dimensional feature representation of cells to two-dimensional
+UMAP space, which is beneficial for visualization and clustering.
+
+*visualization_pmd* is for visualizing the Positive Merge Divergence for cells, in which the dots with blue color are
+the positive cells, and the red color for negative cells. For the positive cells, the deeper blue color indicate more
+better mixture. 
+
+*get_cluster* is for grouping the cells into clusters using k-means.
+"""
 
 def visualization_pmd(emb, pmd, filename, s=1):
+    """
+        This is the API to visualizing the PMD metric for each cell in scatter plot. the dots with blue color are
+        the positive cells, and the red color for negative cells. For the positive cells, the deeper blue color
+        indicate more better mixture.
+
+        Parameters
+        ----------
+        emb  : numpy.ndarray or pandas.DataFrame. The ndarray or DataFrame is expected to contain the two-dimensional
+            UMAP features of cells, the shape of the matrix is expected as (n_cells, 2).
+
+        pmd: pd.Series, each element for the merge divergence of a positive cell, and None for negative cells. Its shape
+            should be (n_cells, 1)
+
+        filename: str or None.
+            save the drawn figure as file {filename} if str is passed.
+            show the drawn figure if NOne is passed.
+
+        s: float, default 1. The dot size in the figure.
+
+        =========
+        The usage demo are included in the Beaconet/test/demo.py
+        =========
+    """
+
     emb = _check_ndarray(emb)
     index = pd.isna(pmd)
     plt.figure()
@@ -36,6 +69,31 @@ def visualization_pmd(emb, pmd, filename, s=1):
 
 
 def visualization(emb,batch_col="batch",bio_col="cell_type",filename1="batch.png",filename2="bio.png"):
+    """
+        This is the API to visualizing cells in scatter plot. the color of dots depends on the given labels (the batch
+            label, cell type label). This function will generate two figures, one for batch and the other for cell type.
+
+        Parameters
+        ----------
+        emb  : pandas.DataFrame. The DataFrame is expected to contain at least four columns, including the
+            two-dimensional UMAP features, a column with batch id and a column with cell type of cells.
+
+        batch_col: str, the column name of batch label in *emb*.
+
+        bio_col: str, the column name of cell type in *emb*.
+
+        filename1: str or None, default 'batch.png'. Save or show batch figure.
+            save the drawn figure as file {filename1} if str is passed.
+            show the drawn figure if NOne is passed.
+
+        filename2: str or None, default 'bio.png'. Save or show cell type figure.
+            save the drawn figure as file {filename2} if str is passed.
+            show the drawn figure if NOne is passed.
+
+        =========
+        The usage demo are included in the Beaconet/test/demo.py
+        =========
+    """
     ndarray_emb = emb[["UMAP_1", "UMAP_2"]].values
     plot(ndarray_emb, groupby=emb[batch_col].values, filename=filename1,
          dpi=500)
@@ -43,9 +101,53 @@ def visualization(emb,batch_col="batch",bio_col="cell_type",filename1="batch.png
          filename=filename2, dpi=500)
 
 def get_umap(df):
+    """
+        This is the API to obtain the two-dimensional UMAP embedding features of the high-dimensional represented cells.
+        If the number of original features is larger than 30, PCA will be applied before UMAP embedding. If the number
+        of original features is smaller or equal to 30, the UMAP embedding will be directly calculated.
+
+        Return
+        ----------
+        emb: pandas.DataFrame. It is a matrix containing the UMAP embedding features of given cells.
+
+        Parameters
+        ----------
+        df  : pandas.DataFrame or numpy.ndarray. A matrix contains the cells with high-dimensional features.
+            The shape is (n_cells, n_features).
+
+        =========
+        The usage demo are included in the Beaconet/test/demo.py
+        =========
+    """
     _, emb, pc = umap(df, downsampling=None)
     return emb
 
+
+def get_cluster(X, k):
+    """
+    This is an API for obtaining clusters from given matrix X (n_cells, n_features). The features of X will be reduced
+    by *get_umap* if it is larger than 30.
+
+    Return
+    ----------
+    labels : ndarray of shape (n_cells,)
+        Index of the cluster each sample belongs to.
+
+    Parameters
+    ----------
+    X: pandas.DataFrame or numpy.ndarray. A matrix contains the cells with features.
+        The shape is (n_cells, n_features).
+
+    k: int. The expected number of clusters, which will be passed to k-means algorithm.
+
+    =========
+    The usage demo are included in the Beaconet/test/demo.py
+    =========
+    """
+    if (X.shape[1] > 30):
+        X = get_umap(X)
+
+    return KMeans(n_clusters=k, n_init=100).fit_predict(X)
 
 def umap(df,downsampling=None,n_pc=30,direct_select=False):
     """
@@ -105,6 +207,13 @@ def umap(df,downsampling=None,n_pc=30,direct_select=False):
            pd.DataFrame(emb_pc,index=row_index,columns=[f"PC_{i}" for i in range(emb_pc.shape[1])])
 
 
+def _check_ndarray(emb):
+    if(isinstance(emb,pd.DataFrame)):
+        return emb.values
+    elif(isinstance(emb,np.ndarray)):
+        return emb
+    else:
+        raise RuntimeError(f"unknown type {type(emb)}")
 
 def scatterplot(df, Label1, Label2=None, fig_path=None):
     def fun(df, hue, s=13):
@@ -144,9 +253,3 @@ def plot(emb,groupby,filename,s=1,figsize=(),dpi=500):
         plt.close()
     else:
         plt.show()
-
-def get_cluster(X,k):
-    if(X.shape[1]>30):
-        X=ump=get_umap(X)
-
-    return KMeans(n_clusters=k,n_init=100).fit_predict(X)
