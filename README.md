@@ -1,5 +1,18 @@
 Beaconet: a reference-free method for integration of multiple batches of scRNA-seq data in original molecular space
 ===========================
+## Catalogue
+* [Introduction](#Introduction)
+* [Author and Mantainer](#Author-and-Mantainer)
+* [Tutorial](#Tutorial)
+    * [Install](#Install)
+        * [Install Pytorch](#Install-Pytorch)
+        * [Install Beaconet](#Install-Beaconet)
+    * [Import necessary packages and functions](#Import-necessary-packages-and-functions)  
+    * [Data preprocessing](#Data-preprocessing)  
+    * [Correct batch effect for integration](#Correct-batch-effect-for-integration)  
+    * [Visualization-and-evaluation](#Visualization-and-evaluation)  
+
+## Introduction
 This project is a python implementation of Beaconet, which is introduced in the paper "A reference-free method for integration of multiple batches of scRNA-seq data in original molecular space".
 
 Batch effect removal is crucial for single-cell data analysis, as the undesired batch-specific systematic variations among different technologies or experimental laboratories may distort biological signals and hinder the integration of datasets. As a reference-free batch effect removal method, Beaconet is particularly beneficial for researchers who lack prior knowledge about the selection of reference when integrate multiple batches of single-cell transcriptomic datasets. Furthermore, the preserved gene features in the corrected data by Beaconet can not only effectively characterize cell types and subpopulations, but also be directly used for downstream differential expression analysis.
@@ -8,20 +21,14 @@ All the preprocessed data, code scripts,and necessary outputs in the experiments
 
 **Keywords:** single-cell data, batch effect, reference-free, molecular feature space;
 
+
 ## Author and Mantainer
 This software is developed and mantained by Han Xu <hxu10670@gmail.com>
 
 ## Tutorial
 This is a tutorial for beginer. We will introduce the whole batch effect removal processing step-by-step using a case task, the integration of two batches of human blood dendritic cell datasets. The batch effect of these two datasets is relative small, since they were generaetd by the same laboratory (Villani et al.) using the same sequencing technology (Smart-Seq2) in different plates. CD1C DC in batch 1 and CD141 DC in batch 2 were removed refering to Tran et al.
 
-### Catalogue
-* [Install](#Install)
-    * [Install Pytorch](#Install-Pytorch)
-    * [Install Beaconet](#Install-Beaconet)
-* [Import nessary packages and functions](#Import-nessary-packages-and-functions)
-* [Data preprocessing](#Data-preprocessing)
-* [Correct batch effect for integration](#Correct-batch-effect-for-integration)
-* [Visualization-and-evaluation](#Visualization-and-evaluation)
+
 ---------
 
 ### Install
@@ -77,7 +84,7 @@ Install Beaconet using pip.
 pip install Beaconet -U
 ```
 
-### Import nessary packages and functions
+### Import necessary packages and functions
 ```python
 from Beaconet import correction,visualization,get_umap,get_pmd,visualization_pmd,get_cluster
 import pandas as pd
