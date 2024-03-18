@@ -178,9 +178,9 @@ the example data is saved in the folder named 'data'.
     visualization_pmd(ump, pmd, filename="test/positive_merge_divergence.png")
 ```
 
-![cell_type](https://github.com/xuxiaohan/Beaconet/blob/main/test/bio.png)
-![batch](https://github.com/xuxiaohan/Beaconet/blob/main/test/batch.png)
-![PMD](https://github.com/xuxiaohan/Beaconet/blob/main/test/positive_merge_divergence.png)
+![cell_type](https://github.com/GaoLabXDU/Beaconet/blob/main/test/bio.png)
+![batch](https://github.com/GaoLabXDU/Beaconet/blob/main/test/batch.png)
+![PMD](https://github.com/GaoLabXDU/Beaconet/blob/main/test/positive_merge_divergence.png)
 
 ### Experimental environment in our study
 To try our best to help the audience who want to reproduce the results in our paper, we provied the specific version of the required environment and package in the experiments of our paper here.
