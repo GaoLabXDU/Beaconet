@@ -1,5 +1,7 @@
 Beaconet: a reference-free method for integration of multiple batches of scRNA-seq data in original molecular space
 ===========================
+This work has been published on Advanced Science 2024. The whole paper is available at https://doi.org/10.1002/advs.202306770.
+
 ## Catalogue
 * [Introduction](#Introduction)
 * [Author and Mantainer](#Author-and-Mantainer)
